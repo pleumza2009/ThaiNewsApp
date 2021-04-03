@@ -6,9 +6,9 @@ import com.pleum.thainewsapp.models.NewsResponse
 import retrofit2.Response
 
 interface NewsRepository    {
-    suspend fun  getNews(countryCode:String,pageNumber:Int): Response<NewsResponse>
+    suspend fun  getNews(countryCode:String,pageNumber:Int): Response<NewsResponse>?
 
-    suspend fun upsert(article: Article): Long
+    suspend fun upsert(article: Article)
 
     fun getSavedNews(): LiveData<List<Article>>
 

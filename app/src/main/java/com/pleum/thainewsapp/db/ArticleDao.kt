@@ -9,7 +9,7 @@ import com.pleum.thainewsapp.models.Article
 interface ArticleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(article: Article):Long
+    suspend fun upsert(article: Article)
 
     @Query("SELECT * FROM articles")
     fun getAllArticles(): LiveData<List<Article>>
