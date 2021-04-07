@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.pleum.thainewsapp.R
@@ -23,10 +24,11 @@ class SetupFragment : Fragment(R.layout.fragment_setup) {
 
     lateinit var binding: FragmentSetupBinding
 
+    @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    @Inject
-    lateinit var  sharedPref : SharedPreferences
+
+
 
     @set:Inject
     var isFirstAppOpen = true
@@ -50,10 +52,12 @@ class SetupFragment : Fragment(R.layout.fragment_setup) {
             )
         }
 
+
+
         binding.tvContinue.setOnClickListener{
             val success = writePersonalDataToSharedPref()
             if (success) {
-                findNavController().navigate(R.id.action_setupFragment_to_newsFragment)
+                findNavController().navigate(SetupFragmentDirections.actionSetupFragmentToNewsFragment())
             }else {
                 Snackbar.make(requireView(), "Please enter all the fields", Snackbar.LENGTH_SHORT).show()
             }

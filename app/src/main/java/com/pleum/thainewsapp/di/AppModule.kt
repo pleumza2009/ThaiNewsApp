@@ -3,6 +3,10 @@ package com.pleum.thainewsapp.di
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.bumptech.glide.request.RequestOptions
+import com.pleum.thainewsapp.R
 import com.pleum.thainewsapp.api.NewsApi
 import com.pleum.thainewsapp.db.ArticleDao
 import com.pleum.thainewsapp.db.ArticleDatabase
@@ -51,7 +55,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideDefaultShoppingRepository(
+    fun provideDefaultNewsRepository(
         api: NewsApi,
         dao: ArticleDao
     ) = DefaultNewsRepository(api,dao) as NewsRepository
@@ -66,6 +70,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideFirstTimeToggle(sharedPref: SharedPreferences) = sharedPref.getBoolean(KEY_FIRST_TIME_TOGGLE,true)
+
 
 
 }

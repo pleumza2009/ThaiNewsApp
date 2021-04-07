@@ -14,14 +14,15 @@ import com.pleum.thainewsapp.NewsApplication
 import com.pleum.thainewsapp.models.Article
 import com.pleum.thainewsapp.models.NewsResponse
 import com.pleum.thainewsapp.respositories.DefaultNewsRepository
+import com.pleum.thainewsapp.respositories.NewsRepository
 import com.pleum.thainewsapp.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
 
 class NewsViewModel @ViewModelInject constructor(
-    app: Application,
-    val defaultNewsRepository: DefaultNewsRepository
+        app: Application,
+        val newsRepository: NewsRepository
 ): AndroidViewModel(app) {
 
     val News: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
@@ -62,13 +63,13 @@ class NewsViewModel @ViewModelInject constructor(
 
 
     fun saveArticle(article: Article) = viewModelScope.launch {
-        defaultNewsRepository.upsert(article)
+        newsRepository.upsert(article)
     }
 
-    fun getSaveNews() = defaultNewsRepository.getSavedNews()
+    fun getSaveNews() = newsRepository.getSavedNews()
 
     fun deleteArticle(article: Article) = viewModelScope.launch {
-        defaultNewsRepository.deleteArticle(article)
+        newsRepository.deleteArticle(article)
     }
 
 
@@ -77,8 +78,8 @@ class NewsViewModel @ViewModelInject constructor(
         News.postValue(Resource.Loading())
         try {
             if (hasInternetConnection()) {
-                val response = defaultNewsRepository.getNews(countryCode, NewsPage)
-                News.postValue(handleBreakingNewsResponse(response))
+                val response = newsRepository.getNews(countryCode, NewsPage)
+                News.postValue(handleBreakingNewsResponse(response!!))
             }else{
                 News.postValue(Resource.Error("No internet connection"))
             }

@@ -3,9 +3,7 @@ package com.pleum.thainewsapp.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AbsListView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -14,18 +12,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pleum.thainewsapp.R
 import com.pleum.thainewsapp.adpaters.NewsAdapter
-import com.pleum.thainewsapp.databinding.FragmentArticleBinding
 import com.pleum.thainewsapp.databinding.FragmentNewsBinding
 import com.pleum.thainewsapp.ui.NewsViewModel
 import com.pleum.thainewsapp.util.Constants.QUERY_PAGE_SIZE
 import com.pleum.thainewsapp.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class NewsFragment : Fragment(R.layout.fragment_news) {
+class NewsFragment  : Fragment(R.layout.fragment_news) {
     lateinit var binding: FragmentNewsBinding
     private val viewModel: NewsViewModel by viewModels()
-    lateinit var  newsAdapter : NewsAdapter
+
+    private   lateinit var  newsAdapter : NewsAdapter
 
 
     val TAG = "BreakingNewsFragment"

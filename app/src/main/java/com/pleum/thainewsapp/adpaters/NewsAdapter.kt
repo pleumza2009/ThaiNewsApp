@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.pleum.thainewsapp.R
 import com.pleum.thainewsapp.databinding.ItemArticlePreviewBinding
 import com.pleum.thainewsapp.models.Article
+import javax.inject.Inject
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
@@ -29,18 +31,14 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return  ViewHolder(ItemArticlePreviewBinding.inflate(LayoutInflater.from(
-                parent.context),
-        parent,
-                false))
+        return  ViewHolder(ItemArticlePreviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val  article = differ.currentList[position]
 
-
-
         holder.binding.apply {
+
             Glide.with(this.root).load(article.urlToImage).into(ivArticleImage)
             tvSource.text = article.source?.name
             tvTitle.text = article.title

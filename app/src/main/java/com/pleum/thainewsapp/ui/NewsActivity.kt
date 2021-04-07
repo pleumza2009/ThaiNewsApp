@@ -6,16 +6,20 @@ import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.pleum.thainewsapp.R
+import com.pleum.thainewsapp.adpaters.NewsAdapter
 import com.pleum.thainewsapp.databinding.NewsActivityBinding
+import com.pleum.thainewsapp.ui.fragments.NewsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewsActivity : AppCompatActivity() {
 
 
 
-    lateinit var binding: NewsActivityBinding
+
+   private lateinit var binding: NewsActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
